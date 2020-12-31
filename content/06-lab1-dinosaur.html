@@ -32,7 +32,6 @@ library(datasauRus)</code></pre>
 </div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
-<pre class="marginfigure"><code>If it&#39;s confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you&#39;re not alone! Have you heard of a [baker&#39;s dozen](https://en.wikipedia.org/wiki/Dozen#Baker&#39;s_dozen)?</code></pre>
 <p>The data frame we will be working with today is called <code>datasaurus_dozen</code> and it’s in the <code>datasauRus</code> package.
 Actually, this single data frame contains 13 datasets, designed to show us why data visualisation is important and how summary statistics alone can be misleading.
 The different datasets are marked by the <code>dataset</code> variable.</p>
@@ -79,7 +78,7 @@ In the paper, the authors simulate a variety of datasets that have the same summ
 <li>Plot <code>y</code> vs. <code>x</code> for the <code>dino</code> dataset. Then, calculate the correlation coefficient between <code>x</code> and <code>y</code> for this dataset.</li>
 </ol>
 <pre class="r"><code>plot(datasaurus_dozen$x, datasaurus_dozen$y)</code></pre>
-<p><img src="/06-lab1-dinosaur_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/06-lab1-dinosaur_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>cor(datasaurus_dozen$x, datasaurus_dozen$y)</code></pre>
 <pre><code>## [1] -0.06601891</code></pre>
 <p>Below is the code you will need to complete this exercise.
@@ -101,7 +100,7 @@ Then, we add another layer to this plot where we define which <code>geom</code>e
 In this case we want these to be points, hence <code>geom_point</code>.</p>
 <pre class="r"><code>ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()</code></pre>
-<p><img src="/06-lab1-dinosaur_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/06-lab1-dinosaur_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>If this seems like a lot, it is.
 And you will learn about the philosophy of building data visualizations in layer in detail next week.
 For now, follow along with the code that is provided.</p>

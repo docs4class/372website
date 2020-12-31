@@ -54,10 +54,6 @@ Note that the packages are also loaded with the same commands in your R Markdown
 
 ## The data
 
-```{marginfigure}
-If it's confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you're not alone! Have you heard of a [baker's dozen](https://en.wikipedia.org/wiki/Dozen#Baker's_dozen)?
-```
-
 The data frame we will be working with today is called `datasaurus_dozen` and it's in the `datasauRus` package.
 Actually, this single data frame contains 13 datasets, designed to show us why data visualisation is important and how summary statistics alone can be misleading.
 The different datasets are marked by the `dataset` variable.
