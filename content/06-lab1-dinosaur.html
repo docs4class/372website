@@ -1,0 +1,166 @@
+---
+title: "Lab 01 - Hello R!"
+output: 
+  tufte::tufte_html:
+    css: ../lab.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+
+
+<pre class="marginfigure"><code>R is the name of the programming language itself and RStudio is a convenient interface.</code></pre>
+<p>The main goal of this lab is to introduce you to R and RStudio, which we will be using throughout the course both to learn the statistical concepts discussed in the course and to analyze real data and come to informed conclusions.</p>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
+<pre class="marginfigure"><code>In R, the fundamental unit of shareable code is the package. </code></pre>
+<p>In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. As of January 2021, there were over 16,000 packages available on the Comprehensive R Archive Network, or CRAN, the public clearing house for R packages. This huge variety of packages is one of the reasons that R is so successful: the chances are that someone has already solved a problem that you’re working on, and you can benefit from their work by downloading their package.</p>
+<pre class="marginfigure"><code>You install them from CRAN with install.packages(&quot;x&quot;).
+You use them in R with library(&quot;x&quot;).
+You get help on them with package?x and help(package = &quot;x&quot;).</code></pre>
+<p>In this lab we will work with two packages: <code>datasauRus</code> which contains the dataset, and <code>tidyverse</code> which is a collection of packages for doing data analysis in a “tidy” way.</p>
+<p>Install these packages by running the following in the console.</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
+install.packages(&quot;datasauRus&quot;)</code></pre>
+<p>Now that the necessary packages are installed, you should be able to Knit your document and see the results.</p>
+<p>If you’d like to run your code in the Console as well you’ll also need to load the packages there.
+To do so, run the following in the console.</p>
+<pre class="r"><code>library(tidyverse) 
+library(datasauRus)</code></pre>
+<p>Note that the packages are also loaded with the same commands in your R Markdown document.</p>
+</div>
+<div id="the-data" class="section level2">
+<h2>The data</h2>
+<pre class="marginfigure"><code>If it&#39;s confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you&#39;re not alone! Have you heard of a [baker&#39;s dozen](https://en.wikipedia.org/wiki/Dozen#Baker&#39;s_dozen)?</code></pre>
+<p>The data frame we will be working with today is called <code>datasaurus_dozen</code> and it’s in the <code>datasauRus</code> package.
+Actually, this single data frame contains 13 datasets, designed to show us why data visualisation is important and how summary statistics alone can be misleading.
+The different datasets are marked by the <code>dataset</code> variable.</p>
+<p>To find out more about the dataset, type the following in your Console: <code>?datasaurus_dozen</code>.
+A question mark before the name of an object will always bring up its help file.
+This command must be ran in the Console.</p>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Based on the help file, how many rows and how many columns does the <code>datasaurus_dozen</code> file have? What are the variables included in the data frame?</li>
+</ol>
+<pre class="r"><code>glimpse(datasaurus_dozen)</code></pre>
+<pre><code>## Rows: 1,846
+## Columns: 3
+## $ dataset &lt;chr&gt; &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;di...
+## $ x       &lt;dbl&gt; 55.3846, 51.5385, 46.1538, 42.8205, 40.7692, 38.7179, 35.64...
+## $ y       &lt;dbl&gt; 97.1795, 96.0256, 94.4872, 91.4103, 88.3333, 84.8718, 79.87...</code></pre>
+<pre class="r"><code>head(datasaurus_dozen)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   dataset     x     y
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 dino     55.4  97.2
+## 2 dino     51.5  96.0
+## 3 dino     46.2  94.5
+## 4 dino     42.8  91.4
+## 5 dino     40.8  88.3
+## 6 dino     38.7  84.9</code></pre>
+<pre class="r"><code>tail(datasaurus_dozen)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   dataset        x     y
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
+## 1 wide_lines  34.7  19.6
+## 2 wide_lines  33.7  26.1
+## 3 wide_lines  75.6  37.1
+## 4 wide_lines  40.6  89.1
+## 5 wide_lines  39.1  96.5
+## 6 wide_lines  34.6  89.6</code></pre>
+<pre class="marginfigure"><code>Matejka, Justin, and George Fitzmaurice. &quot;Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing.&quot; Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems. ACM, 2017.</code></pre>
+<p>The original Datasaurus (<code>dino</code>) was created by Alberto Cairo in <a href="http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html">this great blog post</a>.
+The other Dozen were generated using simulated annealing and the process is described in the paper <em>Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics</em> through Simulated Annealing by Justin Matejka and George Fitzmaurice.
+In the paper, the authors simulate a variety of datasets that have the same summary statistics as the Datasaurus but have very different distributions.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Plot <code>y</code> vs. <code>x</code> for the <code>dino</code> dataset. Then, calculate the correlation coefficient between <code>x</code> and <code>y</code> for this dataset.</li>
+</ol>
+<pre class="r"><code>plot(datasaurus_dozen$x, datasaurus_dozen$y)</code></pre>
+<p><img src="/06-lab1-dinosaur_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>cor(datasaurus_dozen$x, datasaurus_dozen$y)</code></pre>
+<pre><code>## [1] -0.06601891</code></pre>
+<p>Below is the code you will need to complete this exercise.
+Basically, the answer is already given, but you need to include relevant bits in your Rmd document and successfully knit it and view the results.</p>
+<p>Start with the <code>datasaurus_dozen</code> and pipe it into the <code>filter</code> function to filter for observations where <code>dataset == "dino"</code>.
+Store the resulting filtered data frame as a new data frame called <code>dino_data</code>.</p>
+<pre class="r"><code>dino_data &lt;- datasaurus_dozen %&gt;%
+  filter(dataset == &quot;dino&quot;)</code></pre>
+<p>There is a lot going on here, so let’s slow down and unpack it a bit.</p>
+<p>First, the pipe operator: <code>%&gt;%</code>, takes what comes before it and sends it as the first argument to what comes after it.
+So here, we’re saying <code>filter</code> the <code>datasaurus_dozen</code> data frame for observations where <code>dataset == "dino"</code>.</p>
+<p>Second, the assignment operator: <code>&lt;-</code>, assigns the name <code>dino_data</code> to the filtered data frame.</p>
+<p>Next, we need to visualize these data.
+We will use the <code>ggplot</code> function for this.
+Its first argument is the data you’re visualizing.
+Next we define the <code>aes</code>thetic mappings.
+In other words, the columns of the data that get mapped to certain aesthetic features of the plot, e.g. the <code>x</code> axis will represent the variable called <code>x</code> and the <code>y</code> axis will represent the variable called <code>y</code>.
+Then, we add another layer to this plot where we define which <code>geom</code>etric shapes we want to use to represent each observation in the data.
+In this case we want these to be points, hence <code>geom_point</code>.</p>
+<pre class="r"><code>ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
+  geom_point()</code></pre>
+<p><img src="/06-lab1-dinosaur_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>If this seems like a lot, it is.
+And you will learn about the philosophy of building data visualizations in layer in detail next week.
+For now, follow along with the code that is provided.</p>
+<p>For the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient.
+Correlation coefficient, often referred to as <span class="math inline">\(r\)</span> in statistics, measures the linear association between two variables.
+You will see that some of the pairs of variables we plot do not have a linear relationship between them.
+This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate <span class="math inline">\(r\)</span> only if relevant.
+In this case, calculating a correlation coefficient really doesn’t make sense since the relationship between <code>x</code> and <code>y</code> is definitely not linear – it’s dinosaurial!</p>
+<p>But, for illustrative purposes, let’s calculate the correlation coefficient between <code>x</code> and <code>y</code>.</p>
+<pre class="marginfigure"><code>Start with `dino_data` and calculate a summary statistic that we will call `r` as the `cor`relation between `x` and `y`.</code></pre>
+<pre class="r"><code>dino_data %&gt;%
+  summarize(r = cor(x, y))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##         r
+##     &lt;dbl&gt;
+## 1 -0.0645</code></pre>
+<p><em>This is a good place to pause, commit changes with the commit message “Added answer for Ex 2”, and push.</em></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Plot <code>y</code> vs. <code>x</code> for the <code>star</code> dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between <code>x</code> and <code>y</code> for this dataset. How does this value compare to the <code>r</code> of <code>dino</code>?</li>
+</ol>
+<p><em>This is another good place to pause, commit changes with the commit message “Added answer for Ex 3”, and push.</em></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Plot <code>y</code> vs. <code>x</code> for the <code>circle</code> dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between <code>x</code> and <code>y</code> for this dataset. How does this value compare to the <code>r</code> of <code>dino</code>?</li>
+</ol>
+<p><em>You should pause again, commit changes with the commit message “Added answer for Ex 4”, and push.</em></p>
+<pre class="marginfigure"><code>Facet by the dataset variable, placing the plots in a 3 column grid, and don&#39;t add a legend.</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Finally, let’s plot all datasets at once. In order to do this we will make use of facetting.</li>
+</ol>
+<pre class="r"><code>ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+  geom_point()+
+  facet_wrap(~ dataset, ncol = 3) +
+  theme(legend.position = &quot;none&quot;)</code></pre>
+<p>And we can use the <code>group_by</code> function to generate all the summary correlation coefficients.</p>
+<pre class="r"><code>datasaurus_dozen %&gt;%
+  group_by(dataset) %&gt;%
+  summarize(r = cor(x, y)) %&gt;%
+  print(13)</code></pre>
+<p>You’re done with the data analysis exercises, but we’d like you to do two more things:</p>
+<ul>
+<li><strong>Resize your figures:</strong></li>
+</ul>
+<p>Click on the gear icon in on top of the R Markdown document, and select “Output Options…” in the dropdown menu.
+In the pop up dialogue box go to the Figures tab and change the height and width of the figures, and hit OK when done.
+Then, knit your document and see how you like the new sizes.
+Change and knit again and again until you’re happy with the figure sizes.
+Note that these values get saved in the YAML.</p>
+<p>You can also use different figure sizes for differen figures.
+To do so click on the gear icon within the chunk where you want to make a change.
+Changing the figure sizes added new options to these chunks: <code>fig.width</code> and <code>fig.height</code>.
+You can change them by defining different values directly in your R Markdown document as well.</p>
+<ul>
+<li><strong>Change the look of your report:</strong></li>
+</ul>
+<p>Once again click on the gear icon in on top of the R Markdown document, and select “Output Options…” in the dropdown menu.
+In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options.
+Hit OK and knit your document to see how it looks.
+Play around with these until you’re happy with the look.</p>
+<p><br></p>
+<pre class="marginfigure"><code>Not sure how to use emojis on your computer? Maybe a teammate can help? Or you can ask your TA as well!</code></pre>
+<p><em>Yay, you’re done! Commit all remaining changes, use the commit message "Done with Lab 1!, and push. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.</em></p>
+</div>
