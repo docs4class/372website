@@ -1,11 +1,12 @@
 ---
-title: "Lab 01 - Hello R!"
-output: 
-  tufte::tufte_html:
-    css: ../lab.css
-    tufte_variant: "envisioned"
-    highlight: pygments
-link-citations: yes
+title: dino
+author: ''
+date: '2020-12-31'
+slug: dino
+categories:
+  - R
+tags:
+  - R Markdown
 ---
 
 
@@ -78,7 +79,7 @@ In the paper, the authors simulate a variety of datasets that have the same summ
 <li>Plot <code>y</code> vs. <code>x</code> for the <code>dino</code> dataset. Then, calculate the correlation coefficient between <code>x</code> and <code>y</code> for this dataset.</li>
 </ol>
 <pre class="r"><code>plot(datasaurus_dozen$x, datasaurus_dozen$y)</code></pre>
-<p><img src="/06-lab1-dinosaur_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>cor(datasaurus_dozen$x, datasaurus_dozen$y)</code></pre>
 <pre><code>## [1] -0.06601891</code></pre>
 <p>Below is the code you will need to complete this exercise.
@@ -100,7 +101,7 @@ Then, we add another layer to this plot where we define which <code>geom</code>e
 In this case we want these to be points, hence <code>geom_point</code>.</p>
 <pre class="r"><code>ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()</code></pre>
-<p><img src="/06-lab1-dinosaur_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>If this seems like a lot, it is.
 And you will learn about the philosophy of building data visualizations in layer in detail next week.
 For now, follow along with the code that is provided.</p>

@@ -1,11 +1,12 @@
 ---
-title: "Lab 01 - Hello R!"
-output: 
-  tufte::tufte_html:
-    css: ../lab.css
-    tufte_variant: "envisioned"
-    highlight: pygments
-link-citations: yes
+title: dino
+author: ''
+date: '2020-12-31'
+slug: dino
+categories:
+  - R
+tags:
+  - R Markdown
 ---
 
 ```{marginfigure}
