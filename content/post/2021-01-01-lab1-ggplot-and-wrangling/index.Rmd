@@ -1,0 +1,98 @@
+---
+title: lab1 - ggplot and wrangling
+author: ''
+date: '2021-01-01'
+slug: lab1-ggplot-and-wrangling
+categories:
+  - R
+tags:
+  - R Markdown
+---
+
+# Airbnb listings in Edinburgh
+
+Recent development in Edinburgh regarding the growth of Airbnb and its impact on the housing market means a better understanding of the Airbnb listings is needed. Using data provided by Airbnb, we can explore how Airbnb availability and prices vary by neighborhood.
+
+The data come from the [Kaggle database](https://www.kaggle.com/thoroc/edinburgh-inside-airbnb/version/2). It's 
+been modified to better serve the goals of this exploration.
+
+## Learning goals
+
+The goal of this assignment is not to conduct a thorough analysis of Airbnb listings in Edinburgh (yet?), but instead to give you a  chance to practice your workflow, data visualization, and interpretation skills.
+
+## Packages
+
+We'll use the **tidyverse** package for this analysis, and the data is in the **dsbox** package. Run the following code in the Console to load these packages.
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(dsbox)
+```
+
+## Data 
+
+The dataset you'll be using is called `edibnb` the data is in the **dsbox** package. Run `View(edibnb)` in your Console to view the data in the data viewer.
+
+## Excercises
+
+1. The dataset you'll be using is called `edibnb` the data is in the **dsbox** package. Run `View(edibnb)` in your Console to view the data in the data viewer. What does each row in the dataset represent?
+
+```{marginfigure}
+**Hint:** The Markdown, ggplot2, and dplyr Quick Reference sheets has an example of inline R code that might be helpful. You can access it from the Help menu in RStudio.
+```
+
+2. How many observations (rows) does the dataset have? What interesting data is present?  What was the purpose of this data being collected in the first place?  Visit the kaggle site if needed.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Do you like kaggle?  How might kaggle be helppful to you?*
+
+Each column represents a variable. We can get a list of the variables in the data frame using the `names()` function.
+
+```{r}
+names(edibnb)
+```
+
+You can find descriptions of each of the variables in the help file for the dataset, which you can access by running `?edibnb` in your Console.
+
+
+3. Create a faceted histogram where each facet represents a neighborhood and displays the distribution of Airbnb prices in that neighborhood. You histogram may be similar (or better! than the example below.)
+
+```{marginfigure}
+**Note:** The plot will give a warning about some observations with non-finite values for price being removed. Don't worry about the warning, it simply means that 199 listings in the data didn't have prices available, so they can't be plotted.
+```
+
+```{r eval=FALSE, echo=FALSE}
+ggplot(data = ___, mapping = aes(x = ___)) +
+  geom_histogram(binwidth = ___) +
+  facet_wrap(~___)
+
+Let's deconstruct this code: 
+
+- `ggplot()` is the function we are using to build our plot, in layers.
+- In the first layer we always define the data frame as the first argument. Then, we define the mappings between the variables in the dataset and the **aes**thetics of the plot (e.g. x and y coordinates, colors, etc.). 
+- In the next layer we represent the data with **geom**etric shapes, in this case with a histogram. You should decide what makes a reasonable bin width for the histogram by trying out a few options.
+- In the final layer we facet the data by neighbourhood.
+
+```
+
+```{r echo=FALSE}
+ggplot(data = edibnb, mapping = aes(x = price)) +
+  geom_histogram(binwidth = 20) +
+  facet_wrap(~neighbourhood)
+```
+
+
+4. Create a similar visualization, this time showing the distribution of review scores (`review_scores_rating`) across neighborhoods. In your answer, include a brief interpretation of how Airbnb guests rate properties in general and how the neighborhoods compare to each other in terms of their ratings.
+
+5. Create another informative visualization of your choosing.  Be prepared to share it with the class -- although the visualization should need no explaining!
+
+## Instructional staff employment trends
+
+The next dataset is about instructional staff employee hiring trends between 1975 and 2011. 
+The dataset is called `instructors`. You can find descriptions of each of the variables in the help file for the dataset, which you can access by running `?instructors` in your Console.
+
+The American Association of University Professors (AAUP) is a nonprofit membership association of faculty and other academic professionals. [This report](https://www.aaup.org/sites/default/files/files/AAUP_Report_InstrStaff-75-11_apr2013.pdf) compiled by the AAUP shows trends in instructional staff employees between 1975 and 2011, and contains an image very similar to the one given below.
+
+6. Recreate a graph similar to the one above (the first page of the report).
+
+7. Discuss how you would improve upon this visualization if the main objective was to communicate that the proportion of part-time faculty have gone up over time compared to 
+other instructional staff types.  Now, implement the improvements and provide your improved visualization as part of your answer. Also write a few sentences about why you chose to make these improvements and how they address the main goal stated above. 
